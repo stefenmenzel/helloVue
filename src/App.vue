@@ -2,7 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="We done made a helloworld of a vue app"/>
-    <TodoList v-bind:list="list"/>
+    <TodoList v-bind:list="list" @toggled="toggleItem"/>
   </div>
 </template>
 
@@ -29,6 +29,13 @@ export default {
         }
       ]
     }    
+  },
+  methods: {
+    toggleItem(index) {
+      console.log('this.list', this.list);
+      this.list[index].completed = !this.list[index].completed
+      // console.log('toggled', index);
+    }
   }
 }
 </script>

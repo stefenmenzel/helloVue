@@ -4,9 +4,10 @@
         <!-- <p>{{list}}</!-->
         <div class="todoList">
             <div>
+                <p>{{test}}</p>
                 <ul>
-                    <li v-for="item in list" :key="item.todo">
-                        <TodoListItem v-bind:todo="item.todo" v-bind:completed="item.completed"/>   
+                    <li v-for="(item, index) in list" :key="index">
+                        <TodoListItem @toggled="toggled" v-bind:keyIndex="index" v-bind:todo="item.todo" v-bind:completed="item.completed"/>   
                     </li>
                 </ul>                
             </div>
@@ -23,8 +24,21 @@
             TodoListItem,
         },
         props: {
-            list: Array
+            list: Array,
+            toggleItem: Function,
         },
+        data() {
+            return{
+                test: 'blah'
+            }
+        },
+        methods: {
+            toggled(index){                
+                this.$emit('toggled', index);
+                this.test = index;
+            // console.log(`you have clicked on ${index}`);
+            },
+        }        
         // mounted () { 
         //  console.log("I'm running at mount") // {x:1}
         //  console.log("I'm running at mount again") // {x:1}
