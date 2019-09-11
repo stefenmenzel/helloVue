@@ -2,7 +2,7 @@
     <div class="todoItemDiv">
         <div class="todoItem">
             <span>{{todo}}</span>
-            <input type="checkbox" v-model="completed" />
+            <input type="checkbox" v-model="completed" @change="toggle"/>
         </div>        
     </div>
 </template>
@@ -12,7 +12,14 @@
         name: "TodoItem",
         props: {
             todo: String,
-            completed: Boolean
-        }
+            completed: Boolean,
+            keyIndex: Number,
+        },
+        methods: {
+            toggle(){
+                // this.$emit('toggled', this.$vnode.key);
+                this.$emit('toggled', this.keyIndex);
+            },
+        }        
     }
 </script>
